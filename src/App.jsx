@@ -52,6 +52,12 @@ export default function App() {
       title: "Train Consistency Monitor",
       description: "Real-time train schedule and consistency analysis",
       tech: ["Python", "Flask", "React", "WebSocket"]
+    },
+    {
+      title: "ArthNiti — India Macro Simulation Lab",
+      description: "World Bank data pipeline, calibrated VAR(1), seeded Monte Carlo, rolling forecast evaluation and FastAPI.",
+      tech: ["Python", "Time Series", "FastAPI", "Docker", "CI"],
+      link: "https://github.com/nexline-01xA/hemanth-portfolio/tree/main/projects/arthniti-india-macro-simulator/"
     }
   ];
 
@@ -380,6 +386,14 @@ export default function App() {
                     </span>
                   ))}
                 </div>
+                {project.link && (
+                  <p style={{ marginTop: "16px" }}>
+                    <a href={project.link} target="_blank" rel="noopener noreferrer"
+                       style={{ color: "#60a5fa", textDecoration: "none", fontSize: "14px" }}>
+                      View source and methodology ↗
+                    </a>
+                  </p>
+                )}
               </div>
             ))}
           </div>
