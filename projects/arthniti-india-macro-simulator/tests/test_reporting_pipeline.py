@@ -2,8 +2,6 @@ from __future__ import annotations
 
 import json
 
-import pandas as pd
-
 from arthniti.evaluation import rolling_origin_backtest
 from arthniti.model import VAR1
 from arthniti.pipeline import run_pipeline

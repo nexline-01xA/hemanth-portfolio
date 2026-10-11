@@ -30,7 +30,7 @@ class VAR1:
     n_transitions: int
 
     @classmethod
-    def fit(cls, panel: pd.DataFrame, *, min_transitions: int = 8) -> "VAR1":
+    def fit(cls, panel: pd.DataFrame, *, min_transitions: int = 8) -> VAR1:
         lagged, target, _ = consecutive_pairs(panel)
         if len(target) < min_transitions:
             raise ModelFitError(f"Need {min_transitions} adjacent annual transitions; got {len(target)}")

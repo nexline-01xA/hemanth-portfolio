@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import platform
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
@@ -34,7 +34,7 @@ def run_pipeline(*, output_dir: Path = Path("outputs"), cache_path: Path = Path(
     manifest = {
         "project": "ArthNiti — India Macroeconomic Simulation Lab",
         "software_version": __version__,
-        "generated_at_utc": datetime.now(timezone.utc).isoformat(),
+        "generated_at_utc": datetime.now(UTC).isoformat(),
         "runtime": {"python": platform.python_version(), "numpy": np.__version__, "pandas": pd.__version__},
         "data": {"country": "India", "country_code": "IND", "requested_year_range": [start_year, end_year],
                  "first_complete_year": int(complete.index.min()), "last_complete_year": int(complete.index.max()),
