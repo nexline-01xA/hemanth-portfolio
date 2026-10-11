@@ -25,7 +25,7 @@ def test_offline_cache_reindexes_year_range(tmp_path, synthetic_panel):
 
 
 def test_offline_missing_cache_fails(tmp_path):
-    with pytest.raises(FileNotFoundError, match="Offline mode requested"):
+    with pytest.raises(FileNotFoundError, match="Offline cache not found"):
         load_panel(2000, 2020, cache_path=tmp_path / "absent.csv", offline=True)
 
 
