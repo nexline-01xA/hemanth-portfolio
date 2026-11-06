@@ -1,0 +1,156 @@
+/* ==========================================================================
+   DESIGN TOKENS — engineering-dossier system (rewrite, Sept 2026)
+
+   Deliberately moved away from the first version's AI-portfolio signals:
+   Space Grotesk/Inter/JetBrains Mono -> IBM Plex Sans + IBM Plex Mono only;
+   purple accent -> graphite + a single rust/amber signal colour; rounded
+   bento cards -> sharp corners, thin rules, technical-document proportions.
+   See PORTFOLIO_AUDIT.md for the full reasoning.
+   ========================================================================== */
+
+:root {
+  color-scheme: light;
+
+  /* ---- Neutral palette: warm paper, graphite ink -- no stark white/black ---- */
+  --paper-0: #faf8f4;
+  --paper-1: #f1ede4;
+  --paper-2: #e6e0d3;
+  --ink-0: #171512;
+  --ink-1: #2c2924;
+  --ink-2: #514c43;
+  --ink-3: #7a7368;
+  --line: #ddd5c4;
+  --line-strong: #c2b8a3;
+
+  /* ---- Single signal colour: deep rust/amber -- a blueprint-stamp,
+     hazard-label colour, not startup-purple ---- */
+  --accent-9: #5c2a0a;
+  --accent-7: #8a3a10;
+  --accent-5: #b8501a;
+  --accent-3: #e8b585;
+  --accent-1: #f7ead9;
+  --accent-contrast: #faf8f4;
+
+  /* Secondary signal colors, status pills only */
+  --signal-live: #2f5233;
+  --signal-live-bg: #e6ede3;
+  --signal-review: #7a4a12;
+  --signal-review-bg: #f2e6d2;
+  --signal-progress: #2c4a5e;
+  --signal-progress-bg: #e2ebee;
+
+  --surface: var(--paper-0);
+  --surface-raised: #ffffff;
+  --surface-sunken: var(--paper-1);
+  --text-primary: var(--ink-0);
+  --text-secondary: var(--ink-2);
+  --text-tertiary: var(--ink-3);
+  --border: var(--line);
+  --border-strong: var(--line-strong);
+  --accent: var(--accent-5);
+  --accent-strong: var(--accent-7);
+  --focus-ring: #171512;
+
+  /* ---- Type: IBM Plex Sans for everything display+body; IBM Plex Mono
+     reserved for genuinely technical tokens (metrics, stack, versions,
+     file-shaped labels) -- not decorative use everywhere ---- */
+  --font-display: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.875rem;
+  --fs-base: 1rem;
+  --fs-md: 1.125rem;
+  --fs-lg: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);
+  --fs-xl: clamp(1.5rem, 1.3rem + 1vw, 2rem);
+  --fs-2xl: clamp(1.9rem, 1.55rem + 1.6vw, 2.6rem);
+  --fs-3xl: clamp(2.25rem, 1.7rem + 2.4vw, 3.4rem);
+
+  --lh-tight: 1.15;
+  --lh-snug: 1.35;
+  --lh-normal: 1.6;
+
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.5rem;
+  --sp-6: 2rem;
+  --sp-7: 3rem;
+  --sp-8: 4.5rem;
+  --sp-9: 6.5rem;
+
+  /* ---- Sharp geometry: technical drawing, not app-UI rounding ---- */
+  --radius-sm: 2px;
+  --radius-md: 3px;
+  --radius-lg: 4px;
+  --radius-pill: 3px;
+
+  --shadow-sm: 0 1px 2px rgba(23, 21, 18, 0.06);
+  --shadow-md: 0 4px 14px -4px rgba(23, 21, 18, 0.14);
+  --shadow-lg: 0 16px 40px -10px rgba(23, 21, 18, 0.22);
+
+  --container-w: 1180px;
+  --container-w-wide: 1400px;
+  --nav-h: 60px;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur: 180ms;
+
+  --grid-line: color-mix(in srgb, var(--ink-0) 7%, transparent);
+  --atmosphere: none;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --paper-0: #0e0d0b;
+  --paper-1: #17150f;
+  --paper-2: #211e17;
+  --ink-0: #f2efe7;
+  --ink-1: #d6d0c2;
+  --ink-2: #a49c8b;
+  --ink-3: #766f61;
+  --line: #2a2620;
+  --line-strong: #3d372c;
+  --grid-line: color-mix(in srgb, var(--ink-0) 8%, transparent);
+
+  --accent-9: #f7ead9;
+  --accent-7: #e8975a;
+  --accent-5: #d67c35;
+  --accent-3: #6b3e18;
+  --accent-1: #241a10;
+  --accent-contrast: #0e0d0b;
+
+  --signal-live: #7fbf87;
+  --signal-live-bg: #16281a;
+  --signal-review: #d9a75c;
+  --signal-review-bg: #2e2210;
+  --signal-progress: #8db4c9;
+  --signal-progress-bg: #16242c;
+
+  --surface: var(--paper-0);
+  --surface-raised: #191712;
+  --surface-sunken: var(--paper-1);
+  --text-primary: var(--ink-0);
+  --text-secondary: var(--ink-2);
+  --text-tertiary: var(--ink-3);
+  --border: var(--line);
+  --border-strong: var(--line-strong);
+  --accent: var(--accent-7);
+  --accent-strong: var(--accent-9);
+  --focus-ring: #f2efe7;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 6px 24px -6px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 24px 60px -12px rgba(0, 0, 0, 0.6);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
