@@ -1,6 +1,6 @@
 import { SITE } from "../data/site.js";
 import { CopyEmailButton } from "../components/UI.jsx";
-import { IconFileText, IconGithub, IconLinkedIn, IconMail, IconOrcid } from "../components/Icons.jsx";
+import { IconFileText, IconGithub, IconLeetcode, IconLinkedIn, IconMail, IconOrcid } from "../components/Icons.jsx";
 
 export default function Contact() {
   return (
@@ -21,6 +21,9 @@ export default function Contact() {
           </a>
           <a className="btn" href={SITE.linkedin} target="_blank" rel="noopener noreferrer">
             <IconLinkedIn /> LinkedIn
+          </a>
+          <a className="btn" href={SITE.leetcode} target="_blank" rel="noopener noreferrer">
+            <IconLeetcode /> LeetCode
           </a>
           <a className="btn" href={SITE.orcid} target="_blank" rel="noopener noreferrer">
             <IconOrcid /> ORCID

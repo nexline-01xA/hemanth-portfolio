@@ -1,5 +1,5 @@
 import { SITE } from "../data/site.js";
-import { IconGithub, IconLinkedIn, IconMail, IconOrcid } from "./Icons.jsx";
+import { IconGithub, IconLeetcode, IconLinkedIn, IconMail, IconOrcid } from "./Icons.jsx";
 
 export default function Footer() {
   return (
@@ -14,6 +14,9 @@ export default function Footer() {
           </a>
           <a href={SITE.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
             <IconLinkedIn size={16} />
+          </a>
+          <a href={SITE.leetcode} target="_blank" rel="noopener noreferrer" aria-label="LeetCode">
+            <IconLeetcode size={16} />
           </a>
           <a href={SITE.orcid} target="_blank" rel="noopener noreferrer" aria-label="ORCID">
             <IconOrcid size={16} />

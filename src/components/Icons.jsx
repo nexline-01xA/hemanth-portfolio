@@ -27,6 +27,15 @@ export function IconGithub({ size = 18, strokeWidth = 1.7, className }) {
   );
 }
 
+export function IconLeetcode({ size = 18, strokeWidth = 1.7, className }) {
+  return (
+    <svg {...base(size, strokeWidth)} className={className}>
+      <path d="m15 3-9 9a4 4 0 0 0 0 5.7l2.3 2.3a4 4 0 0 0 5.7 0l2-2" />
+      <path d="m9 9 3-3 5 5M10 15h11" />
+    </svg>
+  );
+}
+
 export function IconLinkedIn({ size = 18, strokeWidth = 1.7, className }) {
   return (
     <svg {...base(size, strokeWidth)} className={className}>

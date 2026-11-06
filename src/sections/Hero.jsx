@@ -1,5 +1,5 @@
 import { SITE } from "../data/site.js";
-import { IconArrowRight, IconFileText, IconGithub, IconLinkedIn, IconOrcid } from "../components/Icons.jsx";
+import { IconArrowRight, IconFileText, IconGithub, IconLeetcode, IconLinkedIn, IconOrcid } from "../components/Icons.jsx";
 import HeroSchematic from "../components/HeroSchematic.jsx";
 import portrait540w from "../assets/portrait-540.webp";
 import portrait540j from "../assets/portrait-540.jpg";
@@ -34,6 +34,10 @@ export default function Hero() {
           <span className="hero__links-sep">&middot;</span>
           <a href={SITE.linkedin} target="_blank" rel="noopener noreferrer">
             <IconLinkedIn size={15} /> LinkedIn
+          </a>
+          <span className="hero__links-sep">&middot;</span>
+          <a href={SITE.leetcode} target="_blank" rel="noopener noreferrer">
+            <IconLeetcode size={15} /> LeetCode
           </a>
           <span className="hero__links-sep">&middot;</span>
           <a href={SITE.orcid} target="_blank" rel="noopener noreferrer">

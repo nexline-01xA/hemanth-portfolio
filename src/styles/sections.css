@@ -54,7 +54,7 @@
   font-size: var(--fs-sm);
   font-weight: 500;
 }
-.hero__links a { color: var(--text-primary); text-decoration: none; }
+.hero__links a { display: inline-flex; align-items: center; gap: 0.4em; white-space: nowrap; color: var(--text-primary); text-decoration: none; }
 .hero__links a:hover { color: var(--accent-strong); }
 .hero__links-sep { color: var(--border-strong); }
 
