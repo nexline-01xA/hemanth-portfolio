@@ -21,8 +21,8 @@ export const SITE = {
 };
 
 export const NAV_LINKS = [
-  { href: "#about", label: "About" },
   { href: "#work", label: "Work" },
+  { href: "#about", label: "About" },
   { href: "#research", label: "Research" },
   { href: "#skills", label: "Toolkit" },
   { href: "#contact", label: "Contact" },

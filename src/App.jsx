@@ -10,27 +10,39 @@ import Experience from "./sections/Experience.jsx";
 import Skills from "./sections/Skills.jsx";
 import CredentialsEducation from "./sections/CredentialsEducation.jsx";
 import Contact from "./sections/Contact.jsx";
-import { useTheme } from "./hooks/index.js";
+import { useEffect, useState } from "react";
+import { MotionContext } from "./motion.js";
 
 export default function App() {
-  const { theme, toggle } = useTheme();
+  const [paused, setPaused] = useState(() => window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", "dark");
+    const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const update = (event) => setPaused(event.matches);
+    preference.addEventListener("change", update);
+    return () => preference.removeEventListener("change", update);
+  }, []);
+  useEffect(() => {
+    document.documentElement.dataset.motion = paused ? "paused" : "active";
+  }, [paused]);
 
   return (
-    <>
-      <Nav theme={theme} onToggleTheme={toggle} />
+    <MotionContext.Provider value={{ paused }}>
+      <div className="ambient-field" aria-hidden="true" />
+      <Nav paused={paused} onToggleMotion={() => setPaused((value) => !value)} />
       <main id="main">
         <Hero />
         <SignalStrip />
-        <About />
         <FeaturedWork />
+        <About />
         <Research />
+        <Skills />
         <MoreProjects />
         <Experience />
-        <Skills />
         <CredentialsEducation />
         <Contact />
       </main>
       <Footer />
-    </>
+    </MotionContext.Provider>
   );
 }

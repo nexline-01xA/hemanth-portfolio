@@ -11,10 +11,10 @@ export default function FeaturedWork() {
     <section id="work" className="section">
       <div className="container">
         <SectionHeading
-          index="02"
+          index="01"
           kicker="SELECTED WORK"
-          title="Selected Work"
-          dek="Six projects that best represent where I am right now. Open any card for the full case study — problem through to status."
+          title="Built to do something real."
+          dek="Four systems. Different problems. One approach: make the intelligence useful, and the engineering hold up."
         />
 
         <div className="work-grid">

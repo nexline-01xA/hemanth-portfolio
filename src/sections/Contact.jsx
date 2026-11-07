@@ -9,7 +9,7 @@ export default function Contact() {
         <p className="numhead__index" data-centered="true">
           09 / CONTACT
         </p>
-        <h2 className="contact__title">Contact</h2>
+        <h2 className="contact__title">Let’s build<br /><span>what’s next.</span></h2>
         <p className="contact__dek">For engineering, systems, research or collaboration.</p>
 
         <div className="contact__actions">

@@ -1,54 +1,24 @@
 import { SectionHeading } from "../components/UI.jsx";
-import SystemMap from "../components/SystemMap.jsx";
+import { SITE } from "../data/site.js";
+import { IconArrowRight } from "../components/Icons.jsx";
+import portrait from "../assets/portrait-540.webp";
 
 export default function About() {
   return (
-    <section id="about" className="section">
-      <div className="container">
-        <SectionHeading index="01" kicker="PROFILE" title="About" />
-
-        <div className="about-grid">
-          <p className="about-grid__statement">
-            I build <em>AI products as systems</em> — models, APIs, data pipelines, persistence
-            and deployment. Research feeds that work and gets held to the same standard of
-            evidence; it isn&rsquo;t a separate half of the identity.
-          </p>
-
-          <div className="about-grid__bio">
-            <p>
-              I&rsquo;m a Computer Science (AI &amp; ML) undergraduate who builds full-stack AI
-              systems — procurement intelligence, enterprise workspace architecture, agentic
-              automation — and backs that engineering with research in model robustness,
-              explainability, LLM systems and statistical modelling.
-            </p>
-            <p>
-              VendorLens and NexusOS AI build human approval into the architecture itself, not as
-              an afterthought. The same standard carries into the research: a study on shortcut
-              learning in fake-news classifiers and SmartRouteLLM&rsquo;s look at LLM routing both
-              publish results that came back negative, because that&rsquo;s what the evidence
-              showed. Nothing here is presented as more finished than it is.
-            </p>
-          </div>
+    <section id="about" className="section about-section">
+      <div className="container about-layout">
+        <div className="portrait-card">
+          <div className="portrait-card__image"><img src={portrait} alt="Hemanth Nomula" width="540" height="706" loading="lazy" /></div>
+          <div className="portrait-card__caption"><span>Hemanth Nomula<small>ENGINEER · RESEARCHER · BUILDER</small></span><span className="portrait-card__mark">HN.</span></div>
+          <span className="portrait-card__corner" aria-hidden="true">+</span>
         </div>
-
-        <div className="about-interests">
-          <div className="about-interests__group">
-            <div className="about-interests__label">Engineering Interests</div>
-            <div className="about-interests__value">LLM systems · AI infrastructure · Full-stack AI products</div>
-          </div>
-          <div className="about-interests__group">
-            <div className="about-interests__label">Research Interests</div>
-            <div className="about-interests__value">Model robustness · Explainability · Statistical modelling</div>
-          </div>
-          <div className="about-interests__group">
-            <div className="about-interests__label">Current Direction</div>
-            <div className="about-interests__value">Cross-dataset evaluation, capability-aware routing, and human-in-the-loop AI systems</div>
-          </div>
-        </div>
-
-        <div className="about-connect">
-          <h3 className="about-connect__title">How the interests connect to the work</h3>
-          <SystemMap />
+        <div className="about-copy">
+          <SectionHeading index="02" kicker="THE PERSON BEHIND THE SYSTEMS" title="Curiosity is the starting point." />
+          <p className="about-lead">Making it work is where<br /><em>the interesting part begins.</em></p>
+          <p>I’m a Computer Science (AI &amp; ML) undergraduate in Hyderabad. I build across the stack: models, APIs, data pipelines, and the infrastructure that turns an idea into a working system.</p>
+          <p>My research asks where models break. My engineering asks how to build around those limits. Both come back to the same thing: evidence over assumptions.</p>
+          <div className="about-focus"><span>LLM systems</span><span>AI infrastructure</span><span>Applied research</span></div>
+          <a className="text-link" href={SITE.resumeUrl} target="_blank" rel="noopener noreferrer">A little more about me <IconArrowRight /></a>
         </div>
       </div>
     </section>

@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { NAV_LINKS, SITE } from "../data/site.js";
 import { useActiveSection, useScrolled } from "../hooks/index.js";
-import { IconClose, IconMenu, IconMoon, IconSun } from "./Icons.jsx";
+import { IconClose, IconMenu, IconArrowRight } from "./Icons.jsx";
 
 const SECTION_IDS = NAV_LINKS.map((l) => l.href.replace("#", ""));
 
-export default function Nav({ theme, onToggleTheme }) {
+export default function Nav({ paused, onToggleMotion }) {
   const scrolled = useScrolled(12);
   const active = useActiveSection(SECTION_IDS);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -20,7 +20,8 @@ export default function Nav({ theme, onToggleTheme }) {
       <header className="nav" data-scrolled={scrolled}>
         <div className="container nav__inner">
           <a href="#top" className="nav__mark" aria-label={`${SITE.name} — home`}>
-            HN<span className="nav__mark-dot">.</span>
+            <span className="nav__monogram">h<span>n</span><i>.</i></span>
+            <span className="nav__name">Hemanth Nomula<span>AI / ML ENGINEER</span></span>
           </a>
 
           <nav aria-label="Primary">
@@ -41,12 +42,15 @@ export default function Nav({ theme, onToggleTheme }) {
           <div className="nav__right">
             <button
               type="button"
-              className="theme-toggle"
-              onClick={onToggleTheme}
-              aria-label={theme === "light" ? "Switch to dark theme" : "Switch to light theme"}
+              className="motion-toggle"
+              onClick={onToggleMotion}
+              aria-label={paused ? "Play animations" : "Pause animations"}
+              aria-pressed={paused}
             >
-              {theme === "light" ? <IconMoon /> : <IconSun />}
+              <span className="motion-bars" data-paused={paused} aria-hidden="true"><i /><i /><i /></span>
+              <span>{paused ? "Motion off" : "Motion on"}</span>
             </button>
+            <a className="nav__contact" href="#contact">Let’s talk <IconArrowRight /></a>
             <button
               type="button"
               className="nav__menu-btn"

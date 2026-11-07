@@ -48,6 +48,7 @@ function LinksBlock({ links }) {
 
 export default function ProjectModal({ project, onClose }) {
   const closeRef = useRef(null);
+  const panelRef = useRef(null);
   const lastFocused = useRef(null);
 
   useEffect(() => {
@@ -58,6 +59,14 @@ export default function ProjectModal({ project, onClose }) {
 
     const onKeyDown = (e) => {
       if (e.key === "Escape") onClose();
+      if (e.key === "Tab") {
+        const focusable = panelRef.current?.querySelectorAll('a[href], button:not([disabled]), [tabindex="0"]');
+        if (!focusable?.length) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
     };
     document.addEventListener("keydown", onKeyDown);
 
@@ -78,7 +87,7 @@ export default function ProjectModal({ project, onClose }) {
 
   return (
     <div className="modal-overlay" onMouseDown={handleOverlayClick}>
-      <div className="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div ref={panelRef} className="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modal-title">
         <div className="modal-panel__head">
           <div>
             <p className="modal-panel__eyebrow">

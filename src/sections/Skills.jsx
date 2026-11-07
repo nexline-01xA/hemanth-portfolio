@@ -5,7 +5,7 @@ export default function Skills() {
   return (
     <section id="skills" className="section">
       <div className="container">
-        <SectionHeading index="06" kicker="TOOLKIT" title="Technical capabilities" />
+        <SectionHeading index="04" kicker="TOOLKIT" title="The tools behind the thinking." />
         <div className="matrix">
           {SKILL_GROUPS.map((group) => (
             <div className="matrix-group" key={group.title}>

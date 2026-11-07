@@ -8,7 +8,7 @@ export default function MoreProjects() {
   return (
     <section id="more-projects" className="section section--tight">
       <div className="container">
-        <SectionHeading index="04" kicker="SECONDARY WORK" title="More work" />
+        <SectionHeading index="05" kicker="SECONDARY WORK" title="More explorations." />
         <div className="more-grid">
           {MORE_PROJECTS.map((p) => (
             <div className="more-card" key={p.id}>
