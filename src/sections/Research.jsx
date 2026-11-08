@@ -15,10 +15,10 @@ export default function Research() {
     <section id="research" className="section">
       <div className="container">
         <SectionHeading
-          index="03"
+
           kicker="APPLIED RESEARCH"
-          title="Where the models break"
-          dek="Both papers below are currently under review. Status is shown as it stands today, not as I'd like it to read."
+          title="Research papers"
+          dek="Studies in model routing, shortcut learning, and evaluation. Methods, findings, and limitations are documented below."
         />
         <div className="research-list">
           {RESEARCH_PAPERS.map((paper) => {

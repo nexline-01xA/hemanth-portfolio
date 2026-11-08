@@ -46,13 +46,13 @@ function LinksBlock({ links }) {
   );
 }
 
-export default function ProjectModal({ project, onClose }) {
+export default function ProjectModal({ project, onClose, standalone = false }) {
   const closeRef = useRef(null);
   const panelRef = useRef(null);
   const lastFocused = useRef(null);
 
   useEffect(() => {
-    if (!project) return undefined;
+    if (!project || standalone) return undefined;
     lastFocused.current = document.activeElement;
     document.body.classList.add("modal-open");
     closeRef.current?.focus();
@@ -77,7 +77,7 @@ export default function ProjectModal({ project, onClose }) {
         lastFocused.current.focus();
       }
     };
-  }, [project, onClose]);
+  }, [project, onClose, standalone]);
 
   if (!project) return null;
 
@@ -86,20 +86,18 @@ export default function ProjectModal({ project, onClose }) {
   };
 
   return (
-    <div className="modal-overlay" onMouseDown={handleOverlayClick}>
-      <div ref={panelRef} className="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div className={standalone ? "case-page container" : "modal-overlay"} onMouseDown={standalone ? undefined : handleOverlayClick}>
+      <div ref={panelRef} className="modal-panel" role={standalone ? undefined : "dialog"} aria-modal={standalone ? undefined : true} aria-labelledby="modal-title">
         <div className="modal-panel__head">
           <div>
             <p className="modal-panel__eyebrow">
               {project.category} <StatusBadge status={project.status} />
             </p>
-            <h2 className="modal-panel__title" id="modal-title">
-              {project.fullTitle || project.title}
-            </h2>
+            <h1 className="modal-panel__title" id="modal-title">{project.fullTitle || project.title}</h1>
           </div>
-          <button type="button" className="modal-panel__close" onClick={onClose} ref={closeRef} aria-label="Close case study">
+          {!standalone && <button type="button" className="modal-panel__close" onClick={onClose} ref={closeRef} aria-label="Close case study">
             <IconClose size={16} />
-          </button>
+          </button>}
         </div>
 
         <p className="modal-panel__tagline">{project.tagline}</p>

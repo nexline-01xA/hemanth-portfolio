@@ -7,9 +7,9 @@ export default function Contact() {
     <section id="contact" className="section">
       <div className="container contact">
         <p className="numhead__index" data-centered="true">
-          09 / CONTACT
+          CONTACT
         </p>
-        <h2 className="contact__title">Let’s build<br /><span>what’s next.</span></h2>
+        <h2 className="contact__title">Contact</h2>
         <p className="contact__dek">For engineering, systems, research or collaboration.</p>
 
         <div className="contact__actions">

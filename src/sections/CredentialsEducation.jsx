@@ -6,7 +6,7 @@ export default function CredentialsEducation() {
     <section id="credentials" className="section">
       <div className="container credentials">
         <div>
-          <SectionHeading index="07" kicker="CREDENTIALS" title="Certifications" />
+          <SectionHeading  kicker="CREDENTIALS" title="Certifications" />
           <div className="cert-rows">
             {CERTIFICATIONS.map((c) => (
               <div className="cert-row" key={c.id}>
@@ -21,7 +21,7 @@ export default function CredentialsEducation() {
         </div>
 
         <div>
-          <SectionHeading index="08" kicker="EDUCATION" title="Currently studying" />
+          <SectionHeading  kicker="EDUCATION" title="Currently studying" />
           <div className="education-card">
             <div className="education-card__degree">B.Tech, Computer Science &amp; Engineering</div>
             <div className="education-card__field">Artificial Intelligence &amp; Machine Learning</div>

@@ -9,7 +9,7 @@
 export const RESEARCH_PAPERS = [
   {
     id: "shortcut-learning-fake-news",
-    title: "Investigating Shortcut Learning in Transformer-Based Fake News Detection",
+    title: "Investigating Shortcut Learning in Transformer-Based Fake News Detection: An Explainability and Ablation Study",
     status: "Under Review",
     venue: "Submitted, IEEE",
     researchQuestion:
@@ -35,7 +35,7 @@ export const RESEARCH_PAPERS = [
   },
   {
     id: "smartroutellm",
-    title: "SmartRouteLLM: Capability-Aware, Cost-Aware LLM Routing",
+    title: "Information Loss in Preference-Derived Supervision for Capability-Aware LLM Routing: An Empirical Study on Chatbot Arena Data",
     status: "Under Review",
     venue: "Submitted, IEEE",
     researchQuestion:

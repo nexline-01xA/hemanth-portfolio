@@ -6,7 +6,7 @@ export default function Footer() {
     <footer className="site-footer">
       <div className="container site-footer__row">
         <p className="site-footer__meta">
-          © {new Date().getFullYear()} {SITE.name} · Built with React &amp; Vite
+          © {new Date().getFullYear()} {SITE.name}
         </p>
         <div className="site-footer__links">
           <a href={SITE.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub">

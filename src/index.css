@@ -5,6 +5,7 @@
 @import "./styles/components.css";
 @import "./styles/sections.css";
 @import "./styles/cinematic.css";
+@import "./styles/editorial.css";
 
 @keyframes modal-in {
   from { opacity: 0; transform: translateY(16px); }

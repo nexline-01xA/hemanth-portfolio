@@ -5,7 +5,7 @@ export default function Experience() {
   return (
     <section id="experience" className="section">
       <div className="container">
-        <SectionHeading index="06" kicker="EXPERIENCE" title="Learning by building." />
+        <SectionHeading  kicker="EXPERIENCE" title="Experience" />
         <div className="timeline">
           {EXPERIENCE.map((exp) => (
             <div className="timeline-row" key={exp.id}>

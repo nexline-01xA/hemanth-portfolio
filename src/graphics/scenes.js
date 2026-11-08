@@ -2,6 +2,7 @@ import * as THREE from "three";
 import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
 
 const PALETTES = {
+  system: ["#d8a16e", "#a0ba83"],
   core: ["#aa91ff", "#65e5f6"],
   nexus: ["#a293ff", "#676bff"],
   vendor: ["#7ce9cf", "#27aab5"],
@@ -59,42 +60,33 @@ function plasma(colorA, colorB) {
   });
 }
 
-function makeCore(root, colors, updates) {
-  const sculpture = new THREE.Group();
-  root.add(sculpture);
-  const shader = plasma(...colors);
-  const sphere = mesh(sculpture, new THREE.SphereGeometry(1.05, 64, 48), shader);
-  const shell = new THREE.Group();
-  sculpture.add(shell);
-  shell.rotation.set(.35, -.25, -.4);
-  const chrome = metal();
-  ring(shell, 1.63, .105, chrome, [1.1, .2, .1]);
-  ring(shell, 1.66, .014, glow(colors[0]), [1.1, .2, .1]);
-  ring(shell, 1.94, .055, chrome, [.15, 1.05, -.4]);
-  ring(shell, 1.98, .009, glow(colors[1]), [.15, 1.05, -.4]);
-  ring(shell, 2.23, .013, metal("#56617c"), [.65, -.3, .25]);
-  const orbit = new THREE.Group();
-  orbit.rotation.set(.65, -.3, .25);
-  sculpture.add(orbit);
-  for (let i = 0; i < 7; i++) {
-    const angle = i / 7 * Math.PI * 2;
-    const node = mesh(orbit, new THREE.IcosahedronGeometry(i === 0 ? .13 : .065, 1), i === 0 ? glow(colors[1]) : chrome,
-      [Math.cos(angle) * 2.23, Math.sin(angle) * 2.23, 0]);
-    node.rotation.set(i, i, 0);
-  }
-  const latitude = new THREE.Group();
-  sculpture.add(latitude);
-  for (let i = 0; i < 3; i++) {
-    ring(latitude, 1.12 + i * .07, .0035, glow(colors[1], .22), [0, i * .8, i * .65]);
-  }
-  updates.push((t) => {
-    shader.uniforms.uTime.value = t;
-    sphere.rotation.y = t * .08;
-    shell.rotation.y = -.25 + t * .055;
-    orbit.rotation.z = t * .085;
-    latitude.rotation.y = -t * .1;
-    sculpture.position.y = Math.sin(t * .5) * .06;
+function makeSystem(root, colors, updates) {
+  const board = new THREE.Group();
+  board.rotation.set(.58, -.35, -.12);
+  root.add(board);
+  const chassis = new THREE.MeshStandardMaterial({ color: "#37422e", metalness: .65, roughness: .48 });
+  const ceramic = new THREE.MeshStandardMaterial({ color: "#b6bca2", metalness: .3, roughness: .4 });
+  mesh(board, new THREE.BoxGeometry(4.8, .12, 2.7), chassis, [0, -.35, 0]);
+  const points = [[-1.65,0,.65],[-1.65,0,-.65],[0,.12,0],[1.6,0,.65],[1.6,0,-.65]];
+  points.forEach((pos,i) => {
+    const size = i === 2 ? .95 : .55;
+    const unit = mesh(board, new THREE.BoxGeometry(size,.32,size), ceramic, pos);
+    mesh(unit,new THREE.BoxGeometry(size*.78,.025,size*.78), chassis,[0,.17,0]);
+    for(let k=0;k<4;k++) mesh(unit,new THREE.BoxGeometry(.05,.04,.12),glow(colors[0]),[-size/2+.08+k*size/4,.05,size/2+.04]);
+    mesh(unit,new THREE.BoxGeometry(.08,.025,.08),glow(colors[1]),[size/3,.19,-size/3]);
   });
+  [[0,2],[1,2],[2,3],[2,4]].forEach(([a,b],i) => {
+    const from=new THREE.Vector3(...points[a]); const to=new THREE.Vector3(...points[b]);
+    from.y=-.12; to.y=-.12;
+    const curve=new THREE.CatmullRomCurve3([from,new THREE.Vector3((from.x+to.x)/2,-.12,from.z),new THREE.Vector3((from.x+to.x)/2,-.12,to.z),to]);
+    mesh(board,new THREE.TubeGeometry(curve,32,.018,6,false),glow(colors[1],.5));
+    const packet=mesh(board,new THREE.BoxGeometry(.10,.07,.10),glow(colors[0]));
+    updates.push(t=>packet.position.copy(curve.getPoint((t*.18+i*.2)%1)));
+  });
+  for(let i=0;i<8;i++) mesh(board,new THREE.BoxGeometry(.18,.07,.32),chassis,[-.9+i*.26,-.22,1.1]);
+  const frame=new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(4.8,.12,2.7)),new THREE.LineBasicMaterial({color:"#829568",transparent:true,opacity:.5}));
+  frame.position.y=-.35;board.add(frame);
+  updates.push(t=>{board.rotation.y=-.35+Math.sin(t*.17)*.1;});
 }
 
 function makeNexus(root, colors, updates) {
@@ -166,7 +158,7 @@ function makeAqua(root, colors, updates) {
 }
 
 export function createScene(host, variant, initiallyPaused) {
-  const isHero = variant === "core";
+  const isHero = variant === "core" || variant === "system";
   const colors = PALETTES[variant] || PALETTES.core;
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: "low-power" });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, window.innerWidth < 700 ? 1.25 : 1.75));
@@ -199,12 +191,12 @@ export function createScene(host, variant, initiallyPaused) {
   const root = new THREE.Group();
   scene.add(root);
   const updates = [];
-  const makers = { core: makeCore, nexus: makeNexus, vendor: makeVendor, finance: makeFinance, aqua: makeAqua };
-  (makers[variant] || makeCore)(root, colors, updates);
+  const makers = { core: makeSystem, system: makeSystem, nexus: makeNexus, vendor: makeVendor, finance: makeFinance, aqua: makeAqua };
+  (makers[variant] || makeSystem)(root, colors, updates);
 
   // Deterministic dust field, independent of frame rate and device size.
   const points = [];
-  for (let i = 1; i < (isHero ? 170 : 50); i++) {
+  for (let i = 1; i < (variant === "system" ? 0 : isHero ? 170 : 50); i++) {
     const f = (n) => { const x = Math.sin(n * 127.1) * 43758.5453; return x - Math.floor(x); };
     points.push((f(i) - .5) * 12, (f(i + 300) - .5) * 9, -2 - f(i + 600) * 5);
   }

@@ -9,16 +9,16 @@ export default function About() {
       <div className="container about-layout">
         <div className="portrait-card">
           <div className="portrait-card__image"><img src={portrait} alt="Hemanth Nomula" width="540" height="706" loading="lazy" /></div>
-          <div className="portrait-card__caption"><span>Hemanth Nomula<small>ENGINEER · RESEARCHER · BUILDER</small></span><span className="portrait-card__mark">HN.</span></div>
+          <div className="portrait-card__caption"><span>Hemanth Nomula<small>COMPUTER SCIENCE · 2024–2028</small></span><span className="portrait-card__mark">HN.</span></div>
           <span className="portrait-card__corner" aria-hidden="true">+</span>
         </div>
         <div className="about-copy">
-          <SectionHeading index="02" kicker="THE PERSON BEHIND THE SYSTEMS" title="Curiosity is the starting point." />
-          <p className="about-lead">Making it work is where<br /><em>the interesting part begins.</em></p>
+          <SectionHeading  kicker="BACKGROUND" title="About me" />
+          <p className="about-lead">I’m Hemanth, a Computer Science undergraduate specialising in AI &amp; ML.</p>
           <p>I’m a Computer Science (AI &amp; ML) undergraduate in Hyderabad. I build across the stack: models, APIs, data pipelines, and the infrastructure that turns an idea into a working system.</p>
-          <p>My research asks where models break. My engineering asks how to build around those limits. Both come back to the same thing: evidence over assumptions.</p>
+          <p>My recent projects cover connected workspaces, document processing, financial controls, and multi-agent workflows. My papers examine model routing and cross-dataset evaluation.</p>
           <div className="about-focus"><span>LLM systems</span><span>AI infrastructure</span><span>Applied research</span></div>
-          <a className="text-link" href={SITE.resumeUrl} target="_blank" rel="noopener noreferrer">A little more about me <IconArrowRight /></a>
+          <a className="text-link" href={SITE.resumeUrl} target="_blank" rel="noopener noreferrer">Download résumé <IconArrowRight /></a>
         </div>
       </div>
     </section>

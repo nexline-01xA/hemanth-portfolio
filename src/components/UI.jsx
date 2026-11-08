@@ -6,7 +6,7 @@ export function SectionHeading({ index, kicker, title, dek, id }) {
     <div className="numhead">
       {(index || kicker) && (
         <p className="numhead__index">
-          {index} {kicker && `/ ${kicker}`}
+          {index}{index && kicker ? " / " : ""}{kicker}
         </p>
       )}
       <h2 className="numhead__title" id={id ? `${id}-heading` : undefined}>

@@ -1,40 +1,20 @@
 import { SITE } from "../data/site.js";
-import { IconArrowRight, IconFileText, IconGithub, IconLeetcode, IconLinkedIn, IconOrcid } from "../components/Icons.jsx";
 import SceneCanvas from "../components/SceneCanvas.jsx";
+import { FLAGSHIP_PROJECTS } from "../data/projects.js";
 
 export default function Hero() {
-  return (
-    <section id="top" className="cinema-hero">
-      <div className="hero-grid" aria-hidden="true" />
-      <div className="container cinema-hero__layout">
-        <div className="cinema-hero__copy">
-          <p className="hero-eyebrow rise-in rise-in-1"><span className="status-dot" /> AI ENGINEERING · SYSTEMS · RESEARCH</p>
-          <h1 className="cinema-hero__title rise-in rise-in-2">Intelligence,<br /><span>engineered.</span></h1>
-          <p className="cinema-hero__intro rise-in rise-in-3">I’m Hemanth. I build AI systems<br className="desktop-break" /> for <strong><span className="u-nowrap">real-world</span> decisions.</strong></p>
-          <p className="cinema-hero__description rise-in rise-in-3">From language models to the infrastructure behind them.<br className="desktop-break" /> Thoughtful engineering. Research that questions the result.</p>
-          <div className="hero__actions rise-in rise-in-4">
-            <a className="btn btn--primary" href="#work">Explore my work <IconArrowRight /></a>
-            <a className="btn btn--outline" href={SITE.resumeUrl} target="_blank" rel="noopener noreferrer"><IconFileText /> Résumé</a>
-          </div>
-          <div className="hero__links rise-in rise-in-4">
-            <a href={SITE.github} target="_blank" rel="noopener noreferrer"><IconGithub size={15} /> GitHub</a>
-            <a href={SITE.linkedin} target="_blank" rel="noopener noreferrer"><IconLinkedIn size={15} /> LinkedIn</a>
-            <a href={SITE.leetcode} target="_blank" rel="noopener noreferrer"><IconLeetcode size={15} /> LeetCode</a>
-            <a href={SITE.orcid} target="_blank" rel="noopener noreferrer"><IconOrcid size={15} /> ORCID</a>
-          </div>
-        </div>
-        <div className="hero-art">
-          <div className="hero-art__halo" aria-hidden="true" />
-          <SceneCanvas variant="core" />
-          <div className="orbital-label orbital-label--top"><i /> INTELLIGENCE CORE<span>01 / SYSTEMS IN MOTION</span></div>
-          <div className="orbital-label orbital-label--bottom"><span className="orbital-cross">+</span> IDEAS → SYSTEMS → IMPACT</div>
-          <div className="hero-art__coordinate" aria-hidden="true">17.3850° N<br />78.4867° E</div>
-        </div>
-        <div className="hero-bottom">
-          <a href="#work" className="scroll-cue"><span>↓</span> SCROLL TO EXPLORE</a>
-          <p>BASED IN HYDERABAD, INDIA <span>·</span> B.TECH CSE / 2024–2028</p>
-        </div>
+  return <section className="home-page container" id="top">
+    <div className="home-caption"><span>PERSONAL PORTFOLIO</span><span>HYDERABAD, INDIA / 2026</span></div>
+    <h1 className="name-title">Hemanth<span>Nomula<span className="name-period">.</span></span></h1>
+    <div className="home-composition">
+      <div className="home-intro">
+        <p className="home-role">Computer Science undergraduate.<br />Focused on AI/ML and software systems.</p>
+        <p>I work on AI applications, backend services, and model evaluation. Here are my projects, papers, and the details behind them.</p>
+        <div className="home-actions"><a className="btn btn--primary" href="/work/">View projects ↗</a><a className="text-link" href={SITE.resumeUrl} target="_blank" rel="noopener noreferrer">Download résumé ↓</a></div>
+        <div className="home-profiles"><a href={SITE.github}>GitHub ↗</a><a href={SITE.linkedin}>LinkedIn ↗</a><a href={SITE.leetcode}>LeetCode ↗</a></div>
       </div>
-    </section>
-  );
+      <figure className="systems-figure"><div className="systems-figure__head"><span>01 / PROCESSING ARCHITECTURE</span><span>LIVE 3D</span></div><SceneCanvas variant="system" /><figcaption><span>Input → processing → storage</span><span>Conceptual study</span></figcaption></figure>
+    </div>
+    <div className="home-index"><p>SELECTED PROJECTS</p><div>{FLAGSHIP_PROJECTS.map((project,i)=><a key={project.id} href={`/work/${project.id}/`}><span>0{i+1}</span><strong>{project.title}</strong><span>↗</span></a>)}</div><a className="home-index__all" href="/research/">Research papers ↗</a></div>
+  </section>;
 }

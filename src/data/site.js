@@ -21,11 +21,10 @@ export const SITE = {
 };
 
 export const NAV_LINKS = [
-  { href: "#work", label: "Work" },
-  { href: "#about", label: "About" },
-  { href: "#research", label: "Research" },
-  { href: "#skills", label: "Toolkit" },
-  { href: "#contact", label: "Contact" },
+  { href: "/work/", label: "Work" },
+  { href: "/research/", label: "Research" },
+  { href: "/about/", label: "About" },
+  { href: "/contact/", label: "Contact" },
 ];
 
 // Editorial "signal strip" — verified numbers only, no padding stats.

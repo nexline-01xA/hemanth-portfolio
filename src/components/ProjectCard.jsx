@@ -3,12 +3,12 @@ import { IconArrowRight } from "./Icons.jsx";
 import SceneCanvas from "./SceneCanvas.jsx";
 
 const VISUALS = { "nexusos-ai": "nexus", vendorlens: "vendor", "finpilot-ai": "finance", aquashift: "aqua" };
-const DOMAINS = ["CONNECTED INTELLIGENCE", "DECISION INTELLIGENCE", "GOVERNED AUTONOMY", "ALWAYS-ON INTELLIGENCE"];
+const DOMAINS = ["WORKSPACE MODULES", "DOCUMENT PROCESSING", "FINANCIAL CONTROLS", "AGENT COORDINATION"];
 
-export default function ProjectCard({ project, index, onOpen }) {
+export default function ProjectCard({ project, index }) {
   const variant = VISUALS[project.id] || "aqua";
   return (
-    <button type="button" className="project-card" data-visual={variant} onClick={() => onOpen(project)} aria-label={`Explore ${project.title} case study`}>
+    <a href={`/work/${project.id}/`} className="project-card" data-visual={variant} aria-label={`Explore ${project.title} case study`}>
       <div className="project-art">
         <span className="project-art__number">{String(index).padStart(2, "0")}</span>
         <span className="project-art__domain">{DOMAINS[index - 1]}</span>
@@ -22,6 +22,6 @@ export default function ProjectCard({ project, index, onOpen }) {
         <p className="project-card__tagline">{project.tagline}</p>
         <div className="project-card__footer"><span className="project-card__stack">{project.stack?.slice(0, 3).join(" / ")}</span><span className="project-card__cta">Case study <IconArrowRight /></span></div>
       </div>
-    </button>
+    </a>
   );
 }

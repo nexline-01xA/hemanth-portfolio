@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { NAV_LINKS, SITE } from "../data/site.js";
-import { useActiveSection, useScrolled } from "../hooks/index.js";
+import { useScrolled } from "../hooks/index.js";
 import { IconClose, IconMenu, IconArrowRight } from "./Icons.jsx";
 
-const SECTION_IDS = NAV_LINKS.map((l) => l.href.replace("#", ""));
+
 
 export default function Nav({ paused, onToggleMotion }) {
   const scrolled = useScrolled(12);
-  const active = useActiveSection(SECTION_IDS);
+  const active = window.location.pathname;
   const [menuOpen, setMenuOpen] = useState(false);
 
   const closeMenu = () => setMenuOpen(false);
@@ -19,18 +19,18 @@ export default function Nav({ paused, onToggleMotion }) {
       </a>
       <header className="nav" data-scrolled={scrolled}>
         <div className="container nav__inner">
-          <a href="#top" className="nav__mark" aria-label={`${SITE.name} — home`}>
+          <a href="/" className="nav__mark" aria-label={`${SITE.name} — home`}>
             <span className="nav__monogram">h<span>n</span><i>.</i></span>
-            <span className="nav__name">Hemanth Nomula<span>AI / ML ENGINEER</span></span>
+            <span className="nav__name">Hemanth Nomula</span>
           </a>
 
           <nav aria-label="Primary">
             <ul className="nav__links">
               {NAV_LINKS.map((link) => {
-                const id = link.href.replace("#", "");
+                const id = link.href;
                 return (
                   <li key={link.href}>
-                    <a href={link.href} aria-current={active === id ? "true" : undefined}>
+                    <a href={link.href} aria-current={active.startsWith(id) ? "page" : undefined}>
                       {link.label}
                     </a>
                   </li>
@@ -50,7 +50,7 @@ export default function Nav({ paused, onToggleMotion }) {
               <span className="motion-bars" data-paused={paused} aria-hidden="true"><i /><i /><i /></span>
               <span>{paused ? "Motion off" : "Motion on"}</span>
             </button>
-            <a className="nav__contact" href="#contact">Let’s talk <IconArrowRight /></a>
+            <a className="nav__contact" href={SITE.resumeUrl}>Résumé <IconArrowRight /></a>
             <button
               type="button"
               className="nav__menu-btn"
