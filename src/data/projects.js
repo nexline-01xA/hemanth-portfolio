@@ -1,14 +1,5 @@
-// Flagship engineering work, in-progress work, and secondary projects.
-//
-// Restructured (Sept 2026, content/evidence/link pass): Featured Work now
-// holds only the 4 engineering flagships, in order — NexusOS, VendorLens,
-// FinPilot AI, AQUA//SHIFT. Research lives in its own dedicated section.
-// Portable Personal Agent and the JPMC/Forage credential moved to
-// secondary work. See PORTFOLIO_AUDIT.md for exactly what's independently
-// verified vs. taken on the author's direct word — several links here
-// could not be independently confirmed from this environment (GitHub's
-// full repo listing isn't browsable here), and are included on the
-// strength of repeated, specific, first-person statements.
+// Project content reconciled with public GitHub repositories on 8 November 2026.
+// See PROJECT_STATUS_AUDIT.md for sources and verification boundaries.
 
 export const FLAGSHIP_PROJECTS = [
   {
@@ -20,6 +11,7 @@ export const FLAGSHIP_PROJECTS = [
     size: "medium",
     category: "AI Systems Engineering",
     status: "In Development",
+    statusDetail: "The public GitHub repository currently contains a LICENSE file only. The implementation described here is not available for public source review.",
     problem: "Knowledge work is scattered across email, calendar, task trackers, documents and meeting notes \u2014 each its own silo of context.",
     approach: "Architected a unified AI workspace spanning 15 application modules (conversations, calendar, projects, knowledge, automations) on ~20 core entities \u2014 one shared data model and permission boundary across modules \u2014 on a Next.js frontend and a layered FastAPI service/repository backend with PostgreSQL/Alembic, with cookie-based authentication (CSRF-protected) and a Google OAuth connector for cross-service account linking.",
     architectureStages: [
@@ -45,7 +37,7 @@ export const FLAGSHIP_PROJECTS = [
     tagline: "From messy vendor quotes to defensible purchasing decisions \u2014 with a human always in the loop.",
     size: "medium",
     category: "AI Systems Engineering",
-    status: "Prototype",
+    status: "Implemented",
     statusDetail: "Submitted to the Build with Gemini XPRIZE (August 2026).",
     problem: "Procurement teams compare vendor quotations that arrive as PDFs, scanned images and spreadsheets in inconsistent formats, which makes it hard to compare offers on equal terms or justify a purchasing decision after the fact.",
     constraints: "The system must never place an order or auto-approve a purchase on its own. Financial calculations can't tolerate floating-point rounding drift.",
@@ -64,9 +56,9 @@ export const FLAGSHIP_PROJECTS = [
       "Every human correction is tracked as an auditable snapshot \u2014 an override is a first-class event, not a bypass",
     ],
     implementation: "Keeping the system a decision-support tool rather than a decision-maker shaped the architecture directly: scoring and negotiation layers are deliberately deterministic, and every extracted field carries confidence and evidence back to its source document.",
-    verification: "Core extraction, scoring and review workflow implemented and backend-tested (pytest, ruff, mypy).",
+    verification: "GitHub Actions passes backend pytest and Ruff, frontend typecheck, lint, tests and production build, and production Compose configuration validation. Google integrations use mocked clients in automated tests; Mypy remains a tracked hardening check.",
     results: [
-      "Full quotation-to-decision pipeline implemented and backend-tested (pytest, ruff, mypy)",
+      "Quotation extraction, scoring, review and approval implemented; backend and frontend CI gates pass",
       "Multi-tenant by design \u2014 organisation membership, role enforcement and tenant isolation",
       "Landed-cost math runs on Decimal, not floats, to avoid rounding drift",
       "A Negotiation Intelligence module runs leverage analysis deterministically \u2014 no LLM call touches the original quotation",
@@ -95,8 +87,8 @@ export const FLAGSHIP_PROJECTS = [
       ],
     },
     category: "AI Systems Engineering \u00b7 Agentic",
-    status: "In Development",
-    statusDetail: "Current verified persistence is SQLite; PostgreSQL is a documented migration target, not yet the runtime.",
+    status: "Completed",
+    statusDetail: "Completed v1.2 demo, with 123/123 tests and backend, frontend, and Docker smoke checks passing in GitHub Actions. SQLite is the intentional verified runtime; PostgreSQL migration and optional live LLM calls are separate extensions.",
     problem: "Reconciliation, cash-flow monitoring and anomaly detection in financial operations are typically manual and reactive.",
     constraints: "Agent tools are allowlisted, not open-ended. Nothing executes without human approval, and every execution is verified against persisted state before the audit entry is written.",
     approach: "Architected a deterministic finance-control core \u2014 reconciliation, anomaly detection, cash-flow forecasting \u2014 where money and approval state are computed deterministically. The LLM only reasons over verified tool outputs and proposes governed actions; it never touches ground truth. A full human-in-the-loop approval flow sits between proposal and execution: agent proposes, approver authorizes, execution is verified against persisted state and audited.",
@@ -137,8 +129,8 @@ export const FLAGSHIP_PROJECTS = [
     tagline: "The AI that stays awake between shifts \u2014 correlating weak signals into incidents before the next shift starts cold.",
     size: "wide",
     category: "AI Systems Engineering \u00b7 Agentic",
-    status: "Competition Submission",
-    statusDetail: "Built for Google's All Things Agentic Hackathon 2026 \u2014 submission deadline August 31, 2026 (independently confirmed live).",
+    status: "Implemented demo",
+    statusDetail: "Implemented local demo for Google's All Things Agentic Hackathon 2026. The public repository documents Phase 6.1, with seven agents and a deterministic Safety Governor; live Gemini and Google Cloud deployment remain outside its documented verification.",
     problem: "Municipal water/wastewater facilities run 24/7 while human operators rotate through shifts. The dangerous failure mode is when several weak signals combine across systems and nobody connects them before the next shift starts cold.",
     constraints: "Decision-support only \u2014 the system must never issue a command to physical plant equipment, even if a model call misbehaves. The Safety Governor is deterministic application code, not an LLM agent.",
     approach: "Built as 7 specialised agents \u2014 Sentinel, Historian, Evidence, Procedure, Risk, Coordinator, Handover \u2014 plus one deterministic, non-LLM Safety Governor. Every agent runs behind a LOCAL_DETERMINISTIC / GOOGLE_ADK_GEMINI provider switch on one typed contract.",
@@ -157,7 +149,7 @@ export const FLAGSHIP_PROJECTS = [
       "Firestore and Pub/Sub have designed integration points, exercised via local/deterministic fallbacks in testing \u2014 not described as connected to live GCP resources",
     ],
     implementation: "The hardest part was proving the safety boundary rather than asserting it \u2014 physical-control actions needed to be structurally absent, not conditionally blocked.",
-    verification: "Backend test suite passing, with explicit coverage for failure recovery and idempotency. This is an actively-developed repository close to a submission deadline, so the exact test count is tracked in the repository itself rather than restated here.",
+    verification: "The public README reports 106 backend tests, including failure recovery, idempotency, provider validation and safety checks. Google network calls are mocked. This is the repository-documented count, not a newly executed test run.",
     results: [
       "7 specialised agents plus 1 deterministic Safety Governor, each with interchangeable local-deterministic and real-Gemini execution paths",
       "Forced-failure recovery verified: retries via idempotency key with zero duplicate incidents created",
@@ -178,9 +170,10 @@ export const IN_PROGRESS_PROJECTS = [
     id: "aion",
     title: "AION",
     fullTitle: "AION \u2014 Adaptive Intelligence-per-Operation Network",
-    status: "Research Proposal",
-    context: "AWS Trainium Frontier Competition \u2014 submitted August 2026",
-    description: "An experimental framework exploring progressive compute activation (\u201ccompute annealing\u201d) for AWS Trainium, routing at the block/tile level rather than per-token. The repository is private. Currently a staged research proposal, not yet a benchmarked system.",
+    status: "Research infrastructure",
+    context: "AWS Trainium Frontier Competition",
+    github: "https://github.com/nexline-01xA/aion-trainium",
+    description: "Public research infrastructure for AWS Trainium: experiment tracking, configuration schemas, compute-annealing schedules and block-level routing interfaces. The official starter pipeline is not integrated, and no hardware benchmark results are claimed.",
   },
 ];
 
@@ -188,7 +181,7 @@ export const MORE_PROJECTS = [
   {
     id: "portable-personal-agent",
     title: "Portable Personal Agent",
-    description: "A personal AI control layer: typed tool registry, a four-level permission model, and an immutable audit log writing an event at every lifecycle transition. 42 backend tests; Phase 1 is CI-verified on every pull request.",
+    description: "Phase 1 foundation: accounts, database, Docker Compose and a dashboard shell. The public repository describes agent execution, connectors, device bridges and automations as future phases.",
     tech: ["FastAPI", "PostgreSQL", "Docker Compose", "GitHub Actions"],
     github: "https://github.com/nexline-01xA/portable-personal-agent",
   },

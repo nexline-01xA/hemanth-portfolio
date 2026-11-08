@@ -37,6 +37,7 @@ export default function FeaturedWork() {
                 </div>
                 <span className="progress-card__context">{p.context}</span>
                 <p className="progress-card__desc">{p.description}</p>
+                {p.github && <a className="text-link" href={p.github} target="_blank" rel="noopener noreferrer">Repository ↗</a>}
               </div>
             ))}
           </div>

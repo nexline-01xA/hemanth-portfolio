@@ -25,6 +25,8 @@ const STATUS_TONE = {
   Prototype: "progress",
   "Competition Submission": "progress",
   Completed: "live",
+  Implemented: "live",
+  "Implemented demo": "live",
   "Open Source": "live",
 };
 
